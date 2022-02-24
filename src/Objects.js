@@ -7,14 +7,26 @@
   и присвоить начальное значение 100000.
   Объект после манипуляций следует вернуть в качестве результата работы функции.
 */
+
 export function personUpdate(data) {
+    if (data.gender === 'male') {
+        if (data.income === undefined) {
+            data.income = 100000;
+        }
+    } else {
+        delete data.age;
+    }
+    return data;
 }
 
 /*
   В функцию objectFieldsList приходят три объекта с различными полями, список которых заранее неизвестен.
   Верните список названий этих полей в алфавитном порядке в виде массива строк.
 */
+
 export function objectFieldsList(obj1, obj2, obj3) {
+    let obj = Object.keys({ ...obj1, ...obj2, ...obj3 });
+    return obj.sort();
 }
 
 /*
@@ -22,5 +34,12 @@ export function objectFieldsList(obj1, obj2, obj3) {
   При этом каждый клон должен дополнительно содержать поле id со своим порядковым номером в массиве.
   Количество клонов - count.
 */
+
 export function objectClone(obj, count) {
+    let objId = [];
+    for (let i = 0; i < count; i++) {
+        obj.id = i;
+        objId[i] = JSON.parse(JSON.stringify(obj));
+    }
+    return objId;
 }
